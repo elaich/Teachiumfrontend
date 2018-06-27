@@ -122,10 +122,12 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
-                        <li class="nav-label">Administrateur</li>
                         <li> <a href="{{ path('appreneur_formations') }}" aria-expanded="false"><i class="fa fa-book"></i>Formations badge</a></li>
-                        <li> <a href="{{ path('admin_inbox') }}" aria-expanded="false"><i class="fa fa-envelope"></i>Messages </a></li>
-                        <li> <a href="#" aria-expanded="false"><i class="fa fa-power-off"></i><span class="hide-menu">Se Deconnecter </span></a></li>
+                        <li> <a href="{{ path('inbox') }}" aria-expanded="false"><i class="fa fa-envelope"></i>Messages </a></li>
+                        {% if is_granted('ROLE_USER') %}
+                          <li> <a href="#" aria-expanded="false"><i class="fa fa-envelope"></i>Contact Admin</a></li>
+                        {% endif %}
+                        <li> <a href="{{ path('logout') }}" aria-expanded="false"><i class="fa fa-power-off"></i><span class="hide-menu">Se Deconnecter </span></a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -141,7 +143,7 @@
                   <h3 class="text-primary">{{message.object}}</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active">Administrateur / Administrateur Message</li>
+                        <li class="breadcrumb-item active">Message</li>
                     </ol>
                 </div>
             </div>
@@ -159,7 +161,7 @@
                                         <a class="btn btn-danger btn-block waves-effect waves-light" href="email-compose.html">Compose</a>
 
                                         <div class="mail-list mt-4">
-                                          <a class="list-group-item border-0 text-danger" href="#"><i class="mdi mdi-inbox font-18 align-middle mr-2"></i><b>Inbox</b><span class="label label-danger float-right ml-2">{{ inbox }}</span></a>
+                                          <a class="list-group-item border-0 text-danger" href="{{ path('inbox') }}"><i class="mdi mdi-inbox font-18 align-middle mr-2"></i><b>Inbox</b><span class="label label-danger float-right ml-2">{{ inbox }}</span></a>
                                             <a class="list-group-item border-0" href="#"><i class="mdi mdi-send font-18 align-middle mr-2"></i>Envoye</a>
                                             <a class="list-group-item border-0" href="#"><i class="mdi mdi-delete font-18 align-middle mr-2"></i>Corbeille</a>
                                         </div>
@@ -223,7 +225,7 @@
 
                                             <div class="media mb-4 mt-1">
                                                 <div class="media-body">
-                                                    <span class="pull-right">07:23 AM</span>
+                                                  <span class="pull-right">{{message.date}}</span>
                                                     <h6 class="m-0">{{message.from}}</h6>
                                                 </div>
                                             </div>

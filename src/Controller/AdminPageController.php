@@ -50,7 +50,7 @@ class AdminPageController extends Controller {
   }
 
   /**
-   * @Route("/admin_formations", name="admin_formations")
+   * @Route("/formations", name="formations")
    */
   public function formations() {
     $formations = $this->formationMapper->formations();
@@ -70,7 +70,7 @@ class AdminPageController extends Controller {
   }
 
   /**
-   * @Route("/inscriptions")
+   * @Route("/inscriptions", name="demandes_inscriptions")
    */
   public function inscriptions() {
     $inscriptions = $this->inscriptionMapper->inscriptions();
@@ -80,7 +80,30 @@ class AdminPageController extends Controller {
   }
 
   /**
-   * @Route("/admin_formations/{id}", name="admin_formation")
+   * @Route("/inscriptions/refuser/{id}", name="refuser_inscription")
+   */
+  public function refuser($id) {
+    $this->inscriptionMapper->refuser($id);
+    return $this->redirectToRoute("demandes_inscriptions");
+  }
+  /**
+   * @Route("/inscriptions/accepter/{id}", name="accepter_inscription")
+   */
+  public function accepter($id) {
+    $this->inscriptionMapper->accepter($id);
+    return $this->redirectToRoute("demandes_inscriptions");
+  }
+
+  /**
+   * @Route("/formations/accepter/{id}", name="accepter_formation")
+   */
+  public function accepterFormation($id) {
+    $this->formationMapper->accepter($id);
+    return $this->redirectToRoute("formations");
+  }
+
+  /**
+   * @Route("/formations/{id}", name="formation")
    */
   public function formation($id) {
     $formation = $this->formationMapper->formation($id);

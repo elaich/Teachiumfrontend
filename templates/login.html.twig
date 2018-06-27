@@ -40,14 +40,14 @@
                         <div class="login-content card">
                             <div class="login-form">
                                 <h4>Login</h4>
-                                <form>
+                                <form action="{{ path('login') }}" method="POST">
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input type="email" class="form-control" placeholder="Email">
+                                        <input type="text" class="form-control" name="_username" placeholder="Email">
                                     </div>
                                     <div class="form-group">
                                         <label>Mot de Passe</label>
-                                        <input type="password" class="form-control" placeholder="Mot de passe">
+                                        <input type="password" class="form-control" name="_password" placeholder="Mot de passe">
                                     </div>
                                     <div class="checkbox">
                                         <label>
@@ -56,6 +56,9 @@
 
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Se Connecter</button>
+                                    <div class="register-link m-t-15 text-center">
+                                      <p>Vous etes nouveau ? <a href="{{path('register')}}"> Creer Un Compte</a></p>
+                                    </div>
                                 </form>
                             </div>
                         </div>

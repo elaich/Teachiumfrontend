@@ -40,25 +40,25 @@
                         <div class="login-content card">
                             <div class="login-form">
                                 <h4>Inscription</h4>
-                                <form>
+                                <form action="{{path('register')}}" method="post">
                                     <div class="form-group">
                                         <label>Nom</label>
-                                        <input type="text" class="form-control" placeholder="Nom">
+                                        <input type="text" class="form-control" placeholder="Nom" name="nom">
                                     </div>
                                     <div class="form-group">
                                         <label>Prenom</label>
-                                        <input type="text" class="form-control" placeholder="Prenom">
+                                        <input type="text" class="form-control" placeholder="Prenom" name="prenom">
                                     </div>
                                     <div class="form-group">
                                         <label>Type</label>
-                                        <select class="form-control">
-                                          <option>Formatteur</option>
-                                          <option>Appreneur</option>
+                                        <select class="form-control" name="type">
+                                          <option value="FORMATTEUR">Formatteur</option>
+                                          <option value="APPRENEUR">Appreneur</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input type="email" class="form-control" placeholder="Email">
+                                        <input type="email" class="form-control" placeholder="Email" name="email">
                                     </div>
                                     <div class="form-group">
                                         <label>Mot de Passe</label>

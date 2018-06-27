@@ -31,6 +31,11 @@ class FormationMapper {
     return $formation;
   }
 
+  public function accepter($id) {
+    $response = $this->client->request('POST', '/admin/formation', ['json' => ['id' => $id]]);
+    return $response->getBody();
+  }
+
   public function formations() {
     $formations = json_decode($this->getFormations(), TRUE);
 

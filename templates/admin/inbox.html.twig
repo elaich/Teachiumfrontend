@@ -122,10 +122,15 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
-                        <li class="nav-label">Administrateur</li>
-                        <li> <a href="{{ path('appreneur_formations') }}" aria-expanded="false"><i class="fa fa-book"></i>Formations badge</a></li>
-                        <li> <a href="{{ path('admin_inbox') }}" aria-expanded="false"><i class="fa fa-envelope"></i>Messages </a></li>
-                        <li> <a href="#" aria-expanded="false"><i class="fa fa-power-off"></i><span class="hide-menu">Se Deconnecter </span></a></li>
+                        <li> <a href="{{ path('formations') }}" aria-expanded="false"><i class="fa fa-book"></i>Formations</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li> <a href="{{ path('demandes_inscriptions') }}" aria-expanded="false"><i class="fa fa-book"></i>Demandes D'inscriptions</a></li>
+                        {% endif %}
+                        <li> <a href="{{ path('inbox') }}" aria-expanded="false"><i class="fa fa-envelope"></i>Messages </a></li>
+                        {% if ( is_granted('ROLE_ADMIN') == false )%}
+                          <li> <a href="{{ path('compose', {"id": "5b32bbe8a7986c370b36c123"}) }}" aria-expanded="false"><i class="fa fa-envelope"></i>Contact Admin</a></li>
+                        {% endif %}
+                        <li> <a href="{{ path('logout') }}" aria-expanded="false"><i class="fa fa-power-off"></i><span class="hide-menu">Se Deconnecter </span></a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -138,10 +143,10 @@
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Administrateur Messages</h3> </div>
+                    <h3 class="text-primary">Messages</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active">Administrateur / Administrateur Messages</li>
+                        <li class="breadcrumb-item active">Messages</li>
                     </ol>
                 </div>
             </div>
@@ -159,7 +164,7 @@
                                         <a class="btn btn-danger btn-block waves-effect waves-light" href="email-compose.html">Compose</a>
 
                                         <div class="mail-list mt-4">
-                                          <a class="list-group-item border-0 text-danger" href="#"><i class="mdi mdi-inbox font-18 align-middle mr-2"></i><b>Inbox</b><span class="label label-danger float-right ml-2">{{ inbox }}</span></a>
+                                          <a class="list-group-item border-0 text-danger" href="{{ path('inbox') }}"><i class="mdi mdi-inbox font-18 align-middle mr-2"></i><b>Inbox</b><span class="label label-danger float-right ml-2">{{ inbox }}</span></a>
                                             <a class="list-group-item border-0" href="#"><i class="mdi mdi-send font-18 align-middle mr-2"></i>Envoye</a>
                                             <a class="list-group-item border-0" href="#"><i class="mdi mdi-delete font-18 align-middle mr-2"></i>Corbeille</a>
                                         </div>
@@ -223,7 +228,7 @@
                                                     <ul class="message-list">
                                                         {% for message in messages %}
                                                           <li class="{% if message.read == false %}unread{% endif %}">
-                                                            <a href="/admin_inbox/{{message.id}}">
+                                                            <a href="/inbox/{{message.id}}">
                                                                 <div class="col-mail col-mail-1">
                                                                     <div class="checkbox-wrapper-mail">
                                                                         <input type="checkbox" id="chk1">
@@ -235,7 +240,7 @@
                                                                   <div class="subject">{{ message.object }} -
                                                                     <span class="teaser">{{message.text}}</span>
                                                                   </div>
-                                                                  <div class="date">11:49 am</div>
+                                                                  <div class="date">{{ message.date }}</div>
                                                                 </div>
                                                             </a>
                                                           </li>
@@ -250,7 +255,7 @@
 
                                         <div class="row">
                                             <div class="col-7">
-                                                2 messages
+                                              {{inbox}} messages
                                             </div>
                                             <div class="col-5">
                                                 <div class="btn-group float-right">

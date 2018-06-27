@@ -17,22 +17,19 @@ class FormatteurController extends Controller {
   }
 
   /**
-   * @Route("/formations/new")
+   * @Route("/formations_new", name="new_formation")
    */
   public function addFormation() {
     return $this->render('formatteur/new.html.twig');
   }
 
   /**
-   * @Route("/formations/success")
+   * @Route("/formations_success", name="formation_success")
    */
   public function submitFormation(Request $request) {
     $data = $request->request->all();
     $this->formationMapper->handlePostFormation($data);
-
-    return new Response(
-      '<html><body>Form Submitted Successfully</body></html>'
-    );
+    return $this->redirectToRoute('formations');
   }
 
 }
